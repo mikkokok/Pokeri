@@ -1,0 +1,12 @@
+package pokeri;
+
+public class Pokeritesti {
+
+	public static void main(String[] args) {
+		System.out.println("Pakka classin testi");
+		Pakka testipakka = new Pakka();
+		//testipakka.luePakka();
+
+	}
+
+}
