@@ -76,5 +76,14 @@ final public class Pakka {
 			maaMap.put(Kortinmaa.RISTI,"♣");
 			maaMap.put(Kortinmaa.PATA,"♠");
 		}
+		public static String korttiMaa (Kortinmaa enum) {
+			switch (enum) {
+				case Kortinmaa.HERTTA: return "♥";
+				case Kortinmaa.RUUTU: return "♦";
+				case Kortinmaa.RISTI: return "♣";
+				case Kortinmaa.PATA: return "♠";
+			}
+			return null;
+		}
 	} // Kortti class
 	} // Pakka class
