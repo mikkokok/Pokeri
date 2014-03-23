@@ -1,0 +1,154 @@
+package pokeri;
+
+import java.util.Collections;
+import java.util.LinkedList;
+
+	/**
+ 	* @author Mikko Kokkonen, 2014
+ 	* @version 0.1
+ 	* Pakka luokka jonka sisällä on kortti luokka
+ 	* Pakka kuvastaa korttipakkaa
+ 	*/
+	public class Pakka {
+	
+	 // Esiintymämuuttuja
+		
+	/**	
+	 * Dynaaminen Pakka josta kortit jaetaan.
+	 */
+	private LinkedList<Kortti> valmisPakka = null;
+	/** Luokkamuuttuja
+	 *  Staattinen 52 kortin pakka, joka luodaan käännösvaiheessa
+	 */
+	@SuppressWarnings("serial")
+	static private LinkedList<Kortti> staticpakka = new LinkedList<Kortti> () {
+	};
+	// --Staticpakka--
+	
+	// Konstruktorit
+	
+	/** Konstruktori jolla luodaan 52 kortin pakkaolio.
+	 * 
+	 */
+	private Pakka() {
+	for (int i=0; i<52;i++) {
+		valmisPakka.add(staticpakka.get(i));
+	}
+	Collections.shuffle(valmisPakka);
+	}
+	
+	 // Havainnointimetodit
+
+	/** Metodi jolla palautetaan kortti pakkaan.
+	 * Alkuehto: Pakka pitää olla luotuna.
+	 * @param palautettava
+	 */
+
+	public void giveKortti(Kortti palautettava) {
+	valmisPakka.addLast(palautettava);
+	}
+	
+	/** getKortti metodi antaa pakasta päällimmäisen kortin
+	 * Alkuehto: Pakka pitää olla luotuna.
+	 * @return
+	 */
+	public Kortti getKortti() {
+		return valmisPakka.removeFirst();
+		
+	}
+	/** 
+	 * Metodi jolla voidaan lukea pakka.
+	 */
+	public String toString() {
+		return null;
+
+	}
+
+	 // Muutosmetodit
+
+	/** Metodi jolla pakka luetaan dynaamiseen listaan ja sekoitetaan
+	 * 
+	 */
+	public void teePakka() {
+		if (valmisPakka==null) {
+			new Pakka();
+		} 
+
+	}
+	/** Metodi jolla voidaan pyytää tietty kortti pakasta.
+	 * Alkuehto: Pakka pitää olla luotuna.
+	 * @param numero
+	 * @param maa
+	 * @return
+	 */
+	public Kortti getTiettyKortti(Kortti.Numero numero, Kortti.Maa maa) {
+		return null;
+		
+	}
+
+	/** 
+	 * Kortti classi jolla kortit luodaan
+	 */
+	 static public class Kortti {
+		
+		// Luokkamuuttujat
+		/** 
+		 * Staattinen enum "Maa" joka sisältää korttien maat
+		 */
+		private static enum Maa {
+			RISTI("♣"),
+			RUUTU("♦"),
+			HERTTA("♥"),
+			PATA("♠");
+			
+			private final String maa;
+			
+			Maa(String maa) {
+				this.maa=maa;
+			}
+		}		
+		/**
+		 * Staattinen enum "Numero" joka sisältää korttien numerot
+		 */
+		private static enum Numero {
+			ASSA (1, 14),
+			KAKSI (2, 2),
+			KOLME (3, 3),
+			NELJA (4, 4),
+			VIISI (5, 5),
+			KUUSI (6, 6),
+			SEITSEMAN (7, 7),
+			KAHDEKSAN (8, 8),
+			YHDEKSAN (9, 9),
+			KYMMENEN (10, 10),
+			JATKA (11, 11),
+			KUNINGATAR (12, 12),
+			KUNKKU (13, 13);
+			
+			private final int minluku;
+			private final int maxluku;
+			
+			/** Konstruktori enumille jolla saadaan korteille oikeat numerot.
+			 * @param minluku
+			 * @param maxluku
+			 */
+			Numero(int minluku, int maxluku) {
+				this.minluku=minluku;  
+				this.maxluku=maxluku;
+			}
+		}		
+		/** Classin konstruktori
+		 * @param maa
+		 * @param numero
+		 */
+		
+		// Konstruktori		
+		/**
+		 * @param maa
+		 * @param numero
+		 */
+		private Kortti(Maa maa, Numero numero) {
+			
+		}
+	} // Kortti class
+	} // Pakka class
