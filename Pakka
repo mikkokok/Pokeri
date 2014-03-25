@@ -10,7 +10,10 @@ import java.util.LinkedList;
  	* Pakka kuvastaa korttipakkaa
  	*/
 	public class Pakka {
-	
+		/** 
+		 * Staattinen enum "Maa" joka sisältää korttien maat
+		 */
+		
 	 // Esiintymämuuttuja
 		
 	/**	
@@ -21,7 +24,15 @@ import java.util.LinkedList;
 	 *  Staattinen 52 kortin pakka, joka luodaan käännösvaiheessa
 	 */
 	@SuppressWarnings("serial")
-	static private LinkedList<Kortti> staticpakka = new LinkedList<Kortti> () {
+	static private LinkedList<Kortti> staticpakka = new LinkedList<Kortti> ()  { 
+		{
+		for (int i=1;i<14;i++) {
+			add(new Kortti(Kortti.Maa.HERTTA, Kortti.Numero.get(i)));
+			add(new Kortti(Kortti.Maa.PATA, Kortti.Numero.get(i)));
+			add(new Kortti(Kortti.Maa.RISTI, Kortti.Numero.get(i)));
+			add(new Kortti(Kortti.Maa.RUUTU, Kortti.Numero.get(i)));
+		}
+		}
 	};
 	// --Staticpakka--
 	
@@ -30,7 +41,7 @@ import java.util.LinkedList;
 	/** Konstruktori jolla luodaan 52 kortin pakkaolio.
 	 * 
 	 */
-	private Pakka() {
+	public Pakka() {
 	for (int i=0; i<52;i++) {
 		valmisPakka.add(staticpakka.get(i));
 	}
@@ -60,7 +71,9 @@ import java.util.LinkedList;
 	 * Metodi jolla voidaan lukea pakka.
 	 */
 	public String toString() {
+		String palautettava;
 		return null;
+		
 
 	}
 
@@ -83,26 +96,25 @@ import java.util.LinkedList;
 	 */
 	public Kortti getTiettyKortti(Kortti.Numero numero, Kortti.Maa maa) {
 		return null;
-		
 	}
 
 	/** 
 	 * Kortti classi jolla kortit luodaan
 	 */
-	 static public class Kortti {
-		
-		// Luokkamuuttujat
-		/** 
-		 * Staattinen enum "Maa" joka sisältää korttien maat
-		 */
-		private static enum Maa {
+	static public class Kortti {
+			// Konstruktorit	
+
+
+		public static enum Maa {
 			RISTI("♣"),
 			RUUTU("♦"),
 			HERTTA("♥"),
 			PATA("♠");
-			
 			private final String maa;
-			
+			private String getMaa() {
+				return this.maa;
+			}
+
 			Maa(String maa) {
 				this.maa=maa;
 			}
@@ -110,7 +122,7 @@ import java.util.LinkedList;
 		/**
 		 * Staattinen enum "Numero" joka sisältää korttien numerot
 		 */
-		private static enum Numero {
+		public static enum Numero {
 			ASSA (1, 14),
 			KAKSI (2, 2),
 			KOLME (3, 3),
@@ -136,19 +148,31 @@ import java.util.LinkedList;
 				this.minluku=minluku;  
 				this.maxluku=maxluku;
 			}
-		}		
+			public int getMinluku() {
+				return minluku;
+			}
+
+			public int getMaxluku() {
+				return maxluku;
+			}
+			private static Numero get(int i) {
+				for (Numero c: Numero.values()) {
+					if (c.minluku==i) {
+						return c;
+					}
+				}
+				return null;
+			}
+		}
 		/** Classin konstruktori
 		 * @param maa
 		 * @param numero
 		 */
+			public Kortti(Maa maa, Numero numero) {
+				
+			}
 		
-		// Konstruktori		
-		/**
-		 * @param maa
-		 * @param numero
-		 */
-		private Kortti(Maa maa, Numero numero) {
-			
-		}
+		// Luokkamuuttujat
+		
 	} // Kortti class
 	} // Pakka class
