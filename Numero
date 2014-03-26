@@ -1,0 +1,41 @@
+package pokeri;
+
+/**
+ * Staattinen enum "Numero" joka sisältää korttien numerot
+ */
+public enum Numero {
+	ASSA(1, 14), KAKSI(2, 2), KOLME(3, 3), NELJA(4, 4), VIISI(5, 5), KUUSI(
+			6, 6), SEITSEMAN(7, 7), KAHDEKSAN(8, 8), YHDEKSAN(9, 9), KYMMENEN(
+			10, 10), JATKA(11, 11), KUNINGATAR(12, 12), KUNKKU(13, 13);
+
+	private final int minluku;
+	private final int maxluku;
+
+	/**
+	 * Konstruktori enumille jolla saadaan korteille oikeat numerot.
+	 * 
+	 * @param minluku
+	 * @param maxluku
+	 */
+	Numero(int minluku, int maxluku) {
+		this.minluku = minluku;
+		this.maxluku = maxluku;
+	}
+
+	public int getMinluku() {
+		return minluku;
+	}
+
+	public int getMaxluku() {
+		return maxluku;
+	}
+
+	public static Numero get(int i) {
+		for (Numero c : Numero.values()) {
+			if (c.minluku == i) {
+				return c;
+			}
+		}
+		return null;
+	}
+}
