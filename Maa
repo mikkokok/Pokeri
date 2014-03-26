@@ -1,0 +1,15 @@
+package pokeri;
+
+public enum Maa {
+	RISTI("Risti"),
+	RUUTU("Ruutu"),
+	HERTTA("Hertta"),
+	PATA("Pata");
+	private final String maa;
+	Maa(String maa) {
+		this.maa = maa;
+	}
+	public String toString() {
+		return maa;
+	}
+}
