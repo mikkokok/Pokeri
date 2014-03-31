@@ -5,8 +5,8 @@ import java.util.LinkedList;
 
 /**
  * @author Mikko Kokkonen, 2014
- * @version 0.1 Pakka luokka jonka sisällä on kortti luokka 
- * Pakka kuvastaa korttipakkaa
+ * @version 0.1 Pakka luokka jonka sisällä on kortti luokka Pakka kuvastaa
+ *          korttipakkaa
  */
 public class Pakka {
 	private static Pakka instance = null;
@@ -23,14 +23,15 @@ public class Pakka {
 	/**
 	 * Luokkamuuttuja Staattinen 52 kortin pakka, joka luodaan käännösvaiheessa
 	 */
-	static private LinkedList<Kortti> staticpakka = new LinkedList<Kortti>(); {
-	
+	static private LinkedList<Kortti> staticpakka = new LinkedList<Kortti>();
+	{
+
 		{
-			for (int i = 1; i < 14; i++) {			
+			for (int i = 1; i < 14; i++) {
 				staticpakka.add(new Kortti(Maa.HERTTA, Numero.get(i)));
 				staticpakka.add(new Kortti(Maa.PATA, Numero.get(i)));
 				staticpakka.add(new Kortti(Maa.RISTI, Numero.get(i)));
-				staticpakka.add(new Kortti(Maa.RUUTU, Numero.get(i)));		
+				staticpakka.add(new Kortti(Maa.RUUTU, Numero.get(i)));
 			}
 		}
 	};
@@ -47,9 +48,9 @@ public class Pakka {
 		for (int i = 0; i < 52; i++) {
 			valmisPakka.add(staticpakka.get(i));
 		}
-		Collections.shuffle(valmisPakka);
-		System.out.println("Pakan koko " +valmisPakka.size());
-		//System.err.println(valmisPakka);
+		//Collections.shuffle(valmisPakka);
+		System.out.println("Pakan koko " + valmisPakka.size());
+		// System.err.println(valmisPakka);
 	}
 
 	// Havainnointimetodit
@@ -79,8 +80,12 @@ public class Pakka {
 	/**
 	 * Metodi jolla voidaan lukea pakka.
 	 */
-	public String toString() {
-		return null;
+	public void luePakka() {
+		int i=1;
+		for (Pakka.Kortti c : valmisPakka ) {
+			System.out.println(i+". kortti on " +c);
+			i++;
+		}
 
 	}
 
@@ -90,12 +95,17 @@ public class Pakka {
 	 * Metodi jolla pakka luetaan dynaamiseen listaan ja sekoitetaan
 	 * 
 	 */
-	public static Pakka teePakka() {
-		if ( instance == null ) {
+	public static Pakka annaPakka() {
+		if (instance == null) {
 			instance = new Pakka();
 		}
 		return instance;
 	}
+	public void sekoitaPakka() {
+		Collections.shuffle(valmisPakka);
+	}
+
+
 	/**
 	 * Metodi jolla voidaan pyytää tietty kortti pakasta. Alkuehto: Pakka pitää
 	 * olla luotuna.
@@ -104,7 +114,12 @@ public class Pakka {
 	 * @param maa
 	 * @return
 	 */
-	public Kortti getTiettyKortti(Numero numero, Maa maa) {
+	public Pakka.Kortti getTiettyKortti(Numero numero, Maa maa) {
+		for (Pakka.Kortti c : valmisPakka) {
+			if (numero==c.numero && maa==c.maa) {
+				return c;
+			}
+		}
 		return null;
 	}
 
@@ -114,11 +129,10 @@ public class Pakka {
 	static public class Kortti {
 		private Maa maa;
 		private Numero numero;
-		// Konstruktorit
 
+		// Konstruktori
 		/**
 		 * Classin konstruktori
-		 * 
 		 * @param maa
 		 * @param numero
 		 */
@@ -126,8 +140,17 @@ public class Pakka {
 			this.maa = maa;
 			this.numero = numero;
 		}
+
+		/* toString metodi
+		 */
 		public String toString() {
-			return this.maa.toString()+" "+this.numero.toString();
+			return this.maa.toString() + " " + this.numero.toString();
+		}
+		public int getMinLuku() {
+			return this.numero.getMinluku();
+		}
+		public int getMaxLuku() {
+			return this.numero.getMaxluku();
 		}
 
 		// Luokkamuuttujat
