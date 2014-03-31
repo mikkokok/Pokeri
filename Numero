@@ -1,12 +1,9 @@
 package pokeri;
 
-/**
- * Staattinen enum "Numero" joka sisältää korttien numerot
- */
 public enum Numero {
-	ASSA(1, 14), KAKSI(2, 2), KOLME(3, 3), NELJA(4, 4), VIISI(5, 5), KUUSI(
-			6, 6), SEITSEMAN(7, 7), KAHDEKSAN(8, 8), YHDEKSAN(9, 9), KYMMENEN(
-			10, 10), JATKA(11, 11), KUNINGATAR(12, 12), KUNKKU(13, 13);
+	Assa(1, 14), Kaksi(2, 2), Kolme(3, 3), Nelja(4, 4), Viisi(5, 5), Kuusi(6, 6), Seitseman(
+			7, 7), Kahdeksan(8, 8), Yhdeksan(9, 9), Kymmenen(10, 10), Jatka(11,
+			11), Kuningatar(12, 12), Kuningas(13, 13);
 
 	private final int minluku;
 	private final int maxluku;
@@ -37,5 +34,6 @@ public enum Numero {
 			}
 		}
 		return null;
-	}
-}
+	} // iteraattori
+
+} // Numero 
