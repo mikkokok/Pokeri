@@ -1,0 +1,109 @@
+package pokeri;
+
+import java.util.LinkedList;
+import java.util.Scanner;
+
+/**
+ * @author Mikko Kokkonen, 2014
+ * @version 0.1
+ * Pelaaja luokka kuvastaa pokeripelaajaa
+ */
+public class Pelaaja {
+	Scanner skanneri = new Scanner(System.in);
+	// Esiintymämuuttujat
+	/** 
+	 * Pelaajan käsi
+	 */
+	private LinkedList<Pakka.Kortti> kasi = new LinkedList<Pakka.Kortti> ();
+	/** 
+	 * Pelaajan nimi
+	 */
+	private String nimi;
+	
+	/**
+	 * Konstruktori
+	 * @param nimi luo pelaajan nimi parametrilla
+	 * Konstruktori luo pelaajan ja hakee samalla käteen viisi korttia
+	 */
+	public Pelaaja(String nimi) {
+		this.nimi=nimi;
+		Pakka pelaajanpakka = Pakka.annaPakka();
+		for (int i=0;i<5;i++) {
+			kasi.add(pelaajanpakka.getKortti());
+		}
+	}
+	// Havainnointimetodit
+	/**
+	 * @return palauttaa pelaajan nimen.
+	 */
+	public String getNimi() {
+		return nimi;
+	}
+
+	/**
+	 * @param nimi asettaa pelaajan nimen.
+	 */
+	public void setNimi(String nimi) {
+		this.nimi = nimi;
+	}
+	
+	/** Metodi palauttaa Stringinä pelaajan nimen sekä kädessä olevat kortit
+	 * Alkuehto: Pelaajalla pitää olla kädessä kortteja
+	 */
+	public String toString() {
+		String skasi=this.nimi;
+		skasi=skasi+": ";
+		for (Pakka.Kortti c : kasi) {
+			skasi=skasi + c.toString() + " ";
+		}
+		return (skasi);
+		
+	}
+	 // Muutosmetodit
+	 
+	/** Metodi jolla kädestä vaihdetaan kortteja muuttamalla oliota.
+	 * Metodi lukee pelaajalle käden, jonka jälkeen pelaaja voi päättää mitä kortteja vaihdetaan. 
+	 * @return 
+	 */
+	public void vaihdaKortteja() {
+		int i=1;
+		int luku=0;
+		Pakka pelaajanpakka = Pakka.annaPakka();
+		System.out.println(this.nimi+" kädessä on:");
+		for (Pakka.Kortti c : kasi) {
+			System.out.println(i+". kortti on " +c);
+			i++;
+		}
+		while (luku != -1) {
+			System.out.println("Anna vaihdettavan kortin järjestysnymero, anna -1 kun olet vaihtanut kortit.");
+			try {
+				luku = skanneri.nextInt();
+				if ( luku != -1 && luku >= 1 && luku <= 5) {
+				luku--; // oikea indexi
+				pelaajanpakka.giveKortti(this.kasi.remove(luku));
+				this.kasi.add(pelaajanpakka.getKortti());
+				}
+			} catch (Exception e) {
+				e.getMessage();
+				skanneri.nextLine();
+			}
+	} // while
+	} // vaihdaKortteja
+	
+	// Pelin logiikkaa varten tarvittavat metodit.
+	public void tarkistakortit() {
+		
+	}
+	
+	public Pakka.Kortti suurinkortti() {
+		Pakka.Kortti suurin = this.kasi.remove(0);
+		for (Pakka.Kortti c : this.kasi) {
+			if (c.getMaxLuku() > suurin.getMaxLuku()) {
+				suurin = c;
+			}
+		}
+		return suurin;
+	}
+	
+	
+} // class
