@@ -1,11 +1,46 @@
 package pokeri;
 
-public class Pokeritesti {
+import java.util.LinkedList;
+
+public class PokeriTesti {
 
 	public static void main(String[] args) {
-		System.out.println("Pakka classin testi");
-		Pakka testipakka = new Pakka();
-		//testipakka.luePakka();
+		System.out.println("Pakkatesti classi");
+		Pakka testi = Pakka.annaPakka();
+		testi.luePakka();
+		testi.sekoitaPakka();
+		Pelaaja esa = new Pelaaja("Esa");
+		Pelaaja pentti = new Pelaaja("Pentti");
+		System.out.println(esa.toString());
+		System.out.println(pentti.toString());
+		testi.luePakka();
+		esa.vaihdaKortteja();
+		System.out.println(esa.toString());
+		System.out.println("Esan suurin kortti: "+esa.suurinkortti());
+		
+		LinkedList<Pakka.Kortti> testi2 = new LinkedList<Pakka.Kortti> ();
+		testi2.add(testi.getKortti());
+		testi2.add(testi.getKortti());
+		testi2.add(testi.getKortti());
+		testi2.add(testi.getKortti());
+		testi2.add(testi.getKortti());
+		for (Pakka.Kortti c : testi2) {
+			System.out.println(c.toString());
+		}
+		//Esa.vaihdaKortteja();
+		/*
+		LinkedList<Pakka.Kortti> Pelaaja = new LinkedList<Pakka.Kortti>();
+		Pelaaja.add(testi.getTiettyKortti(Numero.Assa, Maa.HERTTA));
+		Pelaaja.add(testi.getTiettyKortti(Numero.Assa, Maa.PATA));
+		Pelaaja.add(testi.getTiettyKortti(Numero.Assa, Maa.RISTI));
+		Pelaaja.add(testi.getTiettyKortti(Numero.Assa, Maa.RUUTU));
+		System.out.println("Pelaajan kortit");
+		for (Pakka.Kortti c : Pelaaja) {
+			System.out.println(c.toString());
+		}
+		Pelaaja.getFirst();
+		*/
+
 
 	}
 
